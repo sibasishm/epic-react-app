@@ -7,10 +7,44 @@ import {Dialog} from '@reach/dialog'
 
 import {Logo} from './components/logo'
 
+function LoginForm({onSubmit, buttonText}) {
+  const handleSubmit = e => {
+    e.preventDefault()
+    const {username, password} = e.target.elements
+
+    onSubmit({
+      username: username.value,
+      password: password.value,
+    })
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="username">Username</label>
+        <input type="text" id="username" />
+      </div>
+      <div>
+        <label htmlFor="password">Password</label>
+        <input type="password" id="password" />
+      </div>
+      <button type="submit">{buttonText}</button>
+    </form>
+  )
+}
+
 function App() {
   const [modalType, setModalType] = React.useState('none')
 
   const closeModal = () => setModalType('none')
+
+  const login = formData => {
+    console.log('Login', formData)
+  }
+
+  const register = formData => {
+    console.log('Regitser', formData)
+  }
 
   return (
     <>
@@ -29,7 +63,7 @@ function App() {
           <VisuallyHidden>Close</VisuallyHidden>
           <span aria-hidden>X Close</span>
         </button>
-        <p>Login</p>
+        <LoginForm onSubmit={login} buttonText="Login" />
       </Dialog>
       <Dialog
         aria-label="Resgistration Modal"
@@ -40,7 +74,7 @@ function App() {
           <VisuallyHidden>Close</VisuallyHidden>
           <span aria-hidden>X Close</span>
         </button>
-        <p>Register</p>
+        <LoginForm onSubmit={register} buttonText="Register" />
       </Dialog>
     </>
   )
