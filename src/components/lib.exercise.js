@@ -36,6 +36,18 @@ import {Dialog as ReachDialog} from '@reach/dialog'
 //   display: 'flex',
 //   flexDirection: 'column',
 
+const Input = styled.input({
+  padding: '0.5rem 0.75rem',
+  borderRadius: '0.25rem',
+  border: '1px solid #f1f1f4',
+  backgroundColor: '#f1f2f7',
+})
+
+const FormGroup = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
+})
+
 const buttonVariants = {
   primary: {
     background: '#3f51b5',
@@ -86,4 +98,4 @@ const Dialog = styled(ReachDialog)({
   },
 })
 
-export {CircleButton, Dialog, Button}
+export {CircleButton, Dialog, Button, FormGroup, Input}
