@@ -1,9 +1,18 @@
-// export * from './index.final'
+import {loadDevTools} from './dev-tools/load'
+import './bootstrap'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import {Profiler} from 'components/profiler'
+import {App} from './app'
+import {AppProviders} from './context'
 
-export * from './index.exercise'
-
-// 💯 Use `@reach/dialog`
-// export * from './index.extra-1'
-
-// 💯 Create a LoginForm component
-// export * from './index.extra-2'
+loadDevTools(() => {
+  ReactDOM.render(
+    <Profiler id="App Root" phases={['mount']}>
+      <AppProviders>
+        <App />
+      </AppProviders>
+    </Profiler>,
+    document.getElementById('root'),
+  )
+})
