@@ -1,6 +1,9 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled/macro'
+import {keyframes} from '@emotion/core'
 import {Dialog as ReachDialog} from '@reach/dialog'
-
+import {FaSpinner} from 'react-icons/fa'
+import * as colors from 'styles/colors'
+import * as mq from 'styles/media-queries'
 // 🐨 create a button styled component here called "Button"
 // make it look nice and allow it to support a "variant" prop which can be
 // either "primary" or "secondary".
@@ -39,8 +42,8 @@ import {Dialog as ReachDialog} from '@reach/dialog'
 const Input = styled.input({
   padding: '0.5rem 0.75rem',
   borderRadius: '0.25rem',
-  border: '1px solid #f1f1f4',
-  backgroundColor: '#f1f2f7',
+  border: `1px solid ${colors.gray10}`,
+  backgroundColor: colors.gray,
 })
 
 const FormGroup = styled.div({
@@ -50,12 +53,12 @@ const FormGroup = styled.div({
 
 const buttonVariants = {
   primary: {
-    background: '#3f51b5',
-    color: 'white',
+    background: colors.indigo,
+    color: colors.base,
   },
   secondary: {
-    background: '#f1f2f7',
-    color: '#434449',
+    background: colors.gray10,
+    color: colors.text,
   },
 }
 
@@ -80,9 +83,9 @@ const CircleButton = styled.button({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  background: 'white',
-  color: '#434449',
-  border: `1px solid #f1f1f4`,
+  background: colors.base,
+  color: colors.text,
+  border: `1px solid ${colors.gray10}`,
   cursor: 'pointer',
 })
 
@@ -92,10 +95,23 @@ const Dialog = styled(ReachDialog)({
   paddingBottom: '3.5em',
   boxShadow: '0 10px 30px -5px rgba(0, 0, 0, 0.2)',
   margin: '20vh auto',
-  '@media (max-width: 991px)': {
+  [mq.small]: {
     width: '100%',
     margin: '10vh auto',
   },
 })
 
-export {CircleButton, Dialog, Button, FormGroup, Input}
+const spin = keyframes({
+  '0%': {transform: 'rotate(0deg)'},
+  '100%': {transform: 'rotate(360deg)'},
+})
+
+const Spinner = styled(FaSpinner)({
+  animation: `${spin} 1s linear infinite`,
+})
+
+Spinner.defaultProps = {
+  'aria-label': 'loading',
+}
+
+export {CircleButton, Dialog, Button, FormGroup, Input, Spinner}
