@@ -3,9 +3,14 @@ function client(endpoint, customConfig = {}) {
   //    make the method default to "GET"
   // 💰 if you're confused by this, that's fine. Scroll down to the bottom
   // and I've got some code there you can copy/paste.
+  const config = {
+    method: 'GET',
+    ...customConfig,
+  }
   // 🐨 call window.fetch(fullURL, config) then handle the json response
   // 📜 https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-  // 💰 here's how to get the full URL: `${process.env.REACT_APP_API_URL}/${endpoint}`
+  const URL = `${process.env.REACT_APP_API_URL}/${endpoint}`
+  return window.fetch(URL, config).then(response => response.json())
 }
 
 export {client}
